@@ -1,3 +1,5 @@
+#Tic Tac Toe w/ the Computer by Nishant S
+
 import sys
 
 sys.setrecursionlimit(1500)
