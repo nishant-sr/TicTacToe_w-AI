@@ -1,5 +1,3 @@
-#Tic Tac Toe w/ the Computer by Nishant S
-
 import sys
 
 sys.setrecursionlimit(1500)
@@ -23,6 +21,86 @@ def player_move():
     pos = move - 1
     return pos
 
+
+#function to check horizontally
+def horizontal(board):
+
+    if board[0]=='X' and board[1]=='X':
+        return 2
+    elif board[1]=='X' and board[2]=='X':
+        return 0
+    elif board[0]=='X' and board[2]=='X':
+        return 1
+
+    elif board[3]=='X' and board[4]=='X':
+        return 5
+    elif board[4]=='X' and board[5]=='X':
+        return 3
+    elif board[3]=='X' and board[5]=='X':
+        return 4
+
+    elif board[6]=='X' and board[7]=='X':
+        return 8
+    elif board[7]=='X' and board[8]=='X':
+        return 6
+    elif board[6]=='X' and board[8]=='X':
+        return 7
+    
+#function to check vertically
+def vertical(board):
+
+    if board[0]=='X' and board[3]=='X':
+        return 6
+    elif board[3]=='X' and board[6]=='X':
+        return 0
+    elif board[0]=='X' and board[6]=='X':
+        return 3
+        
+    elif board[1]=='X' and board[4]=='X':
+        return 7
+    elif board[4]=='X' and board[7]=='X':
+        return 1
+    elif board[7]=='X' and board[1]=='X':
+        return 4
+        
+
+    elif board[2]=='X' and board[5]=='X':
+        return 8
+    elif board[5]=='X' and board[8]=='X':
+        return 2
+    elif board[2]=='X' and board[8]=='X':
+        return 5
+    
+#function to check diagonally
+def diagonal(board):
+    
+    if board[0]=='X' and board[4]=='X':
+        return 8
+    elif board[4]=='X' and board[8]=='X':
+        return 0
+    elif board[0]=='X' and board[8]=='X':
+        return 4
+
+    elif board[2]=='X' and board[4]=='X':
+        return 6
+    elif board[4]=='X' and board[6]=='X':
+        return 2
+    elif board[2]=='X' and board[6]=='X':
+        return 4
+
+#function to check for tricks
+def tricks(board):
+
+    if board[1]=='X' and board[3]=='X':
+        return 0
+    elif board[1]=='X' and board[5]=='X':
+        return 2
+
+    elif board[7]=='X' and board[3]=='X':
+        return 6
+    elif board[7]=='X' and board[5]=='X':
+        return 8
+
 #function for computer move
 def comp_moveO(board):
     while board:
@@ -34,98 +112,38 @@ def comp_moveO(board):
             
 
         #horizontal
-        if board[0]=='X' and board[1]=='X':
-            return 2
-        elif board[1]=='X' and board[2]=='X':
-            return 0
-        elif board[0]=='X' and board[2]=='X':
-            return 1
-        
-        elif board[3]=='X' and board[4]=='X':
-            return 5
-        elif board[4]=='X' and board[5]=='X':
-            return 3
-        elif board[3]=='X' and board[5]=='X':
-            return 4
-
-        elif board[6]=='X' and board[7]=='X':
-            return 8
-        elif board[7]=='X' and board[8]=='X':
-            return 6
-        elif board[6]=='X' and board[8]=='X':
-            return 7
+        horizontal(board)
 
         #Vertical
-        
-        elif board[0]=='X' and board[3]=='X':
-            return 6
-        elif board[3]=='X' and board[6]=='X':
-            return 0
-        elif board[0]=='X' and board[6]=='X':
-            return 3
-        
-        elif board[1]=='X' and board[4]=='X':
-            return 7
-        elif board[4]=='X' and board[7]=='X':
-            return 1
-        elif board[7]=='X' and board[1]=='X':
-            return 4
-        
-
-        elif board[2]=='X' and board[5]=='X':
-            return 8
-        elif board[5]=='X' and board[8]=='X':
-            return 2
-        elif board[2]=='X' and board[8]=='X':
-            return 5
+        vertical(board)
 
         #diagonal
-        elif board[0]=='X' and board[4]=='X':
-            return 8
-        elif board[4]=='X' and board[8]=='X':
-            return 0
-        elif board[0]=='X' and board[8]=='X':
-            return 4
-
-        elif board[2]=='X' and board[4]=='X':
-            return 6
-        elif board[4]=='X' and board[6]=='X':
-            return 2
-        elif board[2]=='X' and board[6]=='X':
-            return 4
+        diagonal(board)
 
         #anticipated tricks
-        elif board[1]=='X' and board[3]=='X':
-            return 0
-        elif board[1]=='X' and board[5]=='X':
-            return 2
-
-        elif board[7]=='X' and board[3]=='X':
-            return 6
-        elif board[7]=='X' and board[5]=='X':
-            return 8
+        tricks(board)
         
-        elif board[1] != ' ':
-                if board[3] == ' ':
-                    return 3
-                elif board[3] != ' ':
-                    if board[7] == ' ':
-                        return 7
-                    elif board[7] != ' ':
-                        if board[5] == ' ':
-                            return 5
-                        else:
-                            if board[0] == ' ':
-                                return 0
-                            elif board[0] != ' ':
-                                if board[2] == ' ':
-                                    return 2
-                                elif board[2] != ' ':
-                                    if board[6] == ' ':
-                                        return 6
-                                    elif board[6] != ' ':
-                                        if board[8] == ' ':
-                                            return 8
+        if board[1] != ' ':
+            if board[3] == ' ':
+                return 3
+            elif board[3] != ' ':
+                if board[7] == ' ':
+                    return 7
+                elif board[7] != ' ':
+                    if board[5] == ' ':
+                        return 5
+                    else:
+                        if board[0] == ' ':
+                            return 0
+                        elif board[0] != ' ':
+                            if board[2] == ' ':
+                                return 2
+                            elif board[2] != ' ':
+                                if board[6] == ' ':
+                                    return 6
+                                elif board[6] != ' ':
+                                    if board[8] == ' ':
+                                        return 8
 
 
 def comp_moveX(board):
@@ -140,95 +158,35 @@ def comp_moveX(board):
                     return 3
 
         #horizontal
-        if board[0]=='O' and board[1]=='O':
-            return 2
-        elif board[1]=='O' and board[2]=='O':
-            return 0
-        elif board[0]=='O' and board[2]=='O':
-            return 1
-        
-        elif board[3]=='O' and board[4]=='O':
-            return 5
-        elif board[4]=='O' and board[5]=='O':
-            return 3
-        elif board[3]=='O' and board[5]=='O':
-            return 4
-
-        elif board[6]=='O' and board[7]=='O':
-            return 8
-        elif board[7]=='O' and board[8]=='O':
-            return 6
-        elif board[6]=='O' and board[8]=='O':
-            return 7
+        horizontal(board)
 
         #Vertical
-        
-        elif board[0]=='O' and board[3]=='O':
-            return 6
-        elif board[3]=='O' and board[6]=='O':
-            return 0
-        elif board[0]=='O' and board[6]=='O':
-            return 3
-        
-        elif board[1]=='O' and board[4]=='O':
-            return 7
-        elif board[4]=='O' and board[7]=='O':
-            return 1
-        elif board[7]=='O' and board[1]=='O':
-            return 4
-        
-
-        elif board[2]=='O' and board[5]=='O':
-            return 8
-        elif board[5]=='O' and board[8]=='O':
-            return 2
-        elif board[2]=='O' and board[8]=='O':
-            return 5
+        vertical(board)
 
         #diagonal
-        elif board[0]=='O' and board[4]=='O':
-            return 8
-        elif board[4]=='O' and board[8]=='O':
-            return 0
-        elif board[0]=='O' and board[8]=='O':
-            return 4
-
-        elif board[2]=='O' and board[4]=='O':
-            return 6
-        elif board[4]=='O' and board[6]=='O':
-            return 2
-        elif board[2]=='O' and board[6]=='O':
-            return 4
+        diagonal(board)
 
         #anticipated tricks
-        elif board[1]=='O' and board[3]=='O':
-            return 0
-        elif board[1]=='O' and board[5]=='O':
-            return 2
-
-        elif board[7]=='O' and board[3]=='O':
-            return 6
-        elif board[7]=='O' and board[5]=='O':
-            return 8
+        tricks(board)
         
-        elif board[3] != ' ':
-                    if board[7] == ' ':
-                        return 7
-                    elif board[7] != ' ':
-                        if board[5] == ' ':
-                            return 5
-                        else:
-                            if board[0] == ' ':
-                                return 0
-                            elif board[0] != ' ':
-                                if board[2] == ' ':
-                                    return 2
-                                elif board[2] != ' ':
-                                    if board[6] == ' ':
-                                        return 6
-                                    elif board[6] != ' ':
-                                        if board[8] == ' ':
-                                            return 8
+        if board[3] != ' ':
+            if board[7] == ' ':
+                return 7
+            elif board[7] != ' ':
+                if board[5] == ' ':
+                    return 5
+                else:
+                    if board[0] == ' ':
+                        return 0
+                    elif board[0] != ' ':
+                        if board[2] == ' ':
+                             return 2
+                        elif board[2] != ' ':
+                            if board[6] == ' ':
+                                return 6
+                            elif board[6] != ' ':
+                                if board[8] == ' ':
+                                    return 8
 
 
 #function to kickoff the game
